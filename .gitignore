@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+ENV/
+
+# DuckDB database artifacts
+*.duckdb
+*.duckdb.wal
+data/*.duckdb
+data/*.duckdb.wal
+
+# Environment local secrets
+.env
+
+# Testing & Logs
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.DS_Store

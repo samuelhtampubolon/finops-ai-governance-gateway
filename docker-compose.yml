@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  finops-gateway:
+    build: .
+    container_name: finops_ai_gateway
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+    environment:
+      - GATEWAY_HOST=0.0.0.0
+      - GATEWAY_PORT=8000
+      - STREAMLIT_PORT=8501
+      - DUCKDB_PATH=data/finops_ledger.duckdb
+      - SEMANTIC_SIMILARITY_THRESHOLD=0.92
+      - COMPLEXITY_ROUTING_THRESHOLD=0.65
+      - JWT_SECRET_KEY=finops-super-secure-production-ready-secret-key-9988-jwt-token
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
